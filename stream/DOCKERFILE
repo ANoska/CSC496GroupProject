@@ -1,0 +1,7 @@
+FROM ubuntu:18.04
+COPY . C:\Users\Austin\Desktop\stream\stream
+WORKDIR C:\Users\Austin\Desktop\stream\stream
+RUN apt-get gcc
+RUN gcc -O stream.c -o stream
+ADD bin /
+CMD [“./stream”]
