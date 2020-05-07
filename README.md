@@ -50,18 +50,26 @@ Our next step was to create a directory and a dockerfile that had the recipe for
 We then created an overlay network called Proj that is used to connect the nodes on a single network to help nodes on the swarm communicate with each other. 
 
 Two containers were created namely cont1 and cont2 on two separate nodes and then connected to the overlay network proj using the following commands:
-**$ sudo docker run -it --name cont1 --network proj testing:Dockerfile
-$ sudo docker run -it --name cont2 --network proj testing1:Dockerfile**
+
+**$ sudo docker run -it --name cont1 --network proj testing:Dockerfile**
+
+**$ sudo docker run -it --name cont2 --network proj testing1:Dockerfile**
+
 testing is the image for container #1 and testing1 is the image for container #2.
 
 The last part of this benchmark involves conducting the test using nuttcp to measure network bandwidth. One node serves as the server and the other as a receiver. 
 To perform the test:
 This command was entered on the transmitting containers terminal: 
+
 **$nuttcp -S**
+
 And the following was entered on the receiving containers terminal.
+
 **$nuttcp 10.0.2.30**
+
 10.0.2.30 is the address of the sender container. This command performs the bandwidth measurement between the recieving container and the sending container.
 
 Final result of the nuttcp benchmark: 
+
 **908.5625 Mbps** 
 
