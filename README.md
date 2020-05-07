@@ -42,3 +42,26 @@ The main determinate of the performance of a system is the system's bandwidth to
 ### Network Bandwidth with nuttcp
 Network bandwidth is the rate at which data flows over the network. This is a measure of throughput (amount per second) rather than speed (distance traveled per second).
 For this project we will be using the nuttcp tool to measure network bandwidth between two systems connected over a network using docker and CloudLab. We will create two separate containers through docker for this. With the help of CloudLab we will attach both the containers on the host to a bridge and then connect the bridge to a network for testing. As mentioned above, we will also be using the pre existing github repository containing Experiments for the ISPASS 2015 poster "An Updated Performance Comparison of Virtual Machines and Linux Containers" as a reference and make modifications to it wherever required.
+###### Process:
+For this benchmark testing we created a cloudlab experiment with two nodes with an UBUNTU 18.04 image. Using the ubuntu terminals we were able to ssh into the nodes separately. We then installed docker, created a docker swarm and added nodes onto it.
+
+Our next step was to create a directory and a dockerfile that had the recipe for the creation of an image (testing for node 1 and testing1 for node 2) on the nodes. The dockerfile’s content makes sure all packages and tools like nuttcp are installed in the image and container.
+
+We then created an overlay network called Proj that is used to connect the nodes on a single network to help nodes on the swarm communicate with each other. 
+
+Two containers were created namely cont1 and cont2 on two separate nodes and then connected to the overlay network proj using the following commands:
+$ sudo docker run -it --name cont1 --network proj testing:Dockerfile
+$ sudo docker run -it --name cont2 --network proj testing1:Dockerfile
+testing is the image for container #1 and testing1 is the image for container #2.
+
+The last part of this benchmark involves conducting the test using nuttcp to measure network bandwidth. One node serves as the server and the other as a receiver. 
+To perform the test:
+This command was entered on the transmitting containers terminal: 
+$nuttcp -S 
+And the following was entered on the receiving containers terminal.
+$nuttcp 10.0.2.30
+10.0.2.30 is the address of the sender container. This command performs the bandwidth measurement between the recieving container and the sending container.
+
+Final result of the nuttcp benchmark: 
+908.5625 Mbps 
+
