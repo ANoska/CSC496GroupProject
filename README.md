@@ -42,7 +42,7 @@ The main determinate of the performance of a system is the system's bandwidth to
 ### Network Bandwidth with nuttcp
 Network bandwidth is the rate at which data flows over the network. This is a measure of throughput (amount per second) rather than speed (distance traveled per second).
 For this project we will be using the nuttcp tool to measure network bandwidth between two systems connected over a network using docker and CloudLab. We will create two separate containers through docker for this. With the help of CloudLab we will attach both the containers on the host to a bridge and then connect the bridge to a network for testing. As mentioned above, we will also be using the pre existing github repository containing Experiments for the ISPASS 2015 poster "An Updated Performance Comparison of Virtual Machines and Linux Containers" as a reference and make modifications to it wherever required.
-###### **Process:**
+#### **Process:**
 For this benchmark testing we created a cloudlab experiment with two nodes with an UBUNTU 18.04 image. Using the ubuntu terminals we were able to ssh into the nodes separately. We then installed docker, created a docker swarm and added nodes onto it.
 
 Our next step was to create a directory and a dockerfile that had the recipe for the creation of an image (testing for node 1 and testing1 for node 2) on the nodes. The dockerfile’s content makes sure all packages and tools like nuttcp are installed in the image and container.
