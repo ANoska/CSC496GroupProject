@@ -28,6 +28,23 @@ Our plan is to mimic the original experiment, but to make a few modifications.
 
 These modifications should bring the dependencies up to date. As for deployment we will be modifying the original Dockerfile and bash script to provide automatic installation and execution of the benchmark and the results will be outputted for users to see.
 
+**Linpack Deliverable 3 Update**
+
+Taking what we learned from other groups during discussion over deliverable 2 we were able to get a version of the linpack benchmark running through Docker toolbox.
+
+By cloning this [repository](https://github.com/ereyes01/linpack) into the working directory of docker toolbox you have the ability to run a docker container that will carry out the benchmark.
+
+Run the following commands after navigating into the repository to run the benchmark:
+
+`sudo docker build -t linpack ./`
+`sudo docker run -it --rm linpack`
+
+A sample of results run on my personal machine can be seen here:
+![Results](https://i.gyazo.com/b1e12ebeda0a8d2e056d7aa6724447c5.png)
+
+While this method did not quite align with our original intended method we were still able to get the benchmark to run through this newly improvised way. We attempted to automate this process as to not require any inputs but the running of a script however the dependancies required proved difficult to script and attempts were unreliable at best. We beleive that the ultimate take away from this benchmark should be to have a good plan to start with but be ready and willing to change tact if need be.
+
+
 
 ### SysBench with MySQL
 MySQL is a popular relation database that is widely used in the cloud and typically Stresses memory, IPC, filesystem, and networking subsystem. The SysBench will help us benchmark the performance of MySQL service under intensive load.  This will require us to create a MySQL container connected to a network, and also create another container instance that will run MySQL command line client against the original container.
